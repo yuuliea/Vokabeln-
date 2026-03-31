@@ -1,0 +1,2116 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мой немецкий словарь</title>
+<style>
+  :root {
+    --bg: #F5F0E8;
+    --bg2: #EDE6D6;
+    --ink: #1A1208;
+    --ink2: #4A3F2F;
+    --ink3: #7A6E5F;
+    --gold: #B8860B;
+    --gold2: #D4A017;
+    --red: #8B2500;
+    --green: #2D5A27;
+    --blue: #1A3A5C;
+    --border: #C8B89A;
+    --card: #FDFAF4;
+    --shadow: rgba(26,18,8,0.12);
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-serif: Georgia, "Times New Roman", Times, serif;
+    --font-mono: "Courier New", Courier, monospace;
+  }
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { background-color: #F5F0E8; }
+
+body {
+background-color: #F5F0E8;
+color: #1A1208;
+font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Helvetica, Arial, sans-serif;
+font-size: 15px;
+line-height: 1.5;
+min-height: 100vh;
+}
+
+/* HEADER */
+header {
+background: var(–ink); background-color: #1A1208;
+padding: 28px 40px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 3px solid var(–gold);
+position: sticky;
+top: 0;
+z-index: 100;
+}
+
+.logo {
+display: flex;
+flex-direction: column;
+gap: 2px;
+}
+
+.logo-title {
+font-family: Georgia, “Times New Roman”, serif;
+font-size: 22px;
+color: #F5F0E8;
+letter-spacing: 0.02em;
+}
+
+.logo-sub {
+font-size: 11px;
+color: var(–gold2);
+letter-spacing: 0.15em;
+text-transform: uppercase;
+font-weight: 300;
+}
+
+.header-stats {
+display: flex;
+gap: 24px;
+}
+
+.stat {
+text-align: center;
+}
+
+.stat-num {
+font-family: Georgia, “Times New Roman”, serif;
+font-size: 20px;
+color: var(–gold2);
+}
+
+.stat-label {
+font-size: 10px;
+color: #8A7A6A;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+}
+
+/* LAYOUT */
+.container {
+max-width: 1100px;
+margin: 0 auto;
+padding: 32px 24px;
+}
+
+/* CONTROLS */
+.controls {
+display: flex;
+gap: 12px;
+margin-bottom: 28px;
+flex-wrap: wrap;
+align-items: center;
+}
+
+.search-wrap {
+position: relative;
+flex: 1;
+min-width: 220px;
+}
+
+.search-icon {
+position: absolute;
+left: 14px;
+top: 50%;
+transform: translateY(-50%);
+color: var(–ink3);
+font-size: 14px;
+}
+
+input[type=“text”], select, textarea {
+width: 100%;
+background: var(–card);
+border: 1.5px solid var(–border);
+color: var(–ink);
+font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Helvetica, Arial, sans-serif;
+font-size: 14px;
+border-radius: 6px;
+outline: none;
+transition: border-color 0.2s;
+}
+
+input[type=“text”]:focus, select:focus, textarea:focus {
+border-color: var(–gold);
+}
+
+.search-input {
+padding: 10px 14px 10px 38px;
+}
+
+select {
+padding: 10px 14px;
+cursor: pointer;
+appearance: none;
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘8’ viewBox=‘0 0 12 8’%3E%3Cpath d=‘M1 1l5 5 5-5’ stroke=’%234A3F2F’ fill=‘none’ stroke-width=‘1.5’/%3E%3C/svg%3E”);
+background-repeat: no-repeat;
+background-position: right 12px center;
+padding-right: 32px;
+}
+
+.btn {
+padding: 10px 20px;
+border: none;
+border-radius: 6px;
+font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Helvetica, Arial, sans-serif;
+font-size: 13px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.18s;
+white-space: nowrap;
+letter-spacing: 0.03em;
+}
+
+.btn-primary {
+background: var(–ink); background-color: #1A1208;
+color: var(–bg);
+border: 1.5px solid var(–ink);
+}
+
+.btn-primary:hover {
+background: var(–gold); background-color: #B8860B;
+border-color: var(–gold);
+color: var(–ink);
+}
+
+.btn-outline {
+background: transparent;
+color: var(–ink2);
+border: 1.5px solid var(–border);
+}
+
+.btn-outline:hover {
+border-color: var(–ink2);
+background: var(–bg2); background-color: #EDE6D6;
+}
+
+.btn-danger {
+background: transparent;
+color: var(–red);
+border: 1.5px solid transparent;
+padding: 4px 8px;
+font-size: 12px;
+}
+
+.btn-danger:hover {
+border-color: var(–red);
+background: rgba(139,37,0,0.05);
+}
+
+/* CATEGORY TABS */
+.cat-tabs {
+display: flex;
+gap: 6px;
+margin-bottom: 24px;
+flex-wrap: wrap;
+}
+
+.cat-tab {
+padding: 6px 16px;
+border-radius: 20px;
+font-size: 12px;
+font-weight: 500;
+cursor: pointer;
+border: 1.5px solid var(–border);
+background: transparent;
+color: var(–ink3);
+transition: all 0.18s;
+font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Helvetica, Arial, sans-serif;
+letter-spacing: 0.04em;
+}
+
+.cat-tab:hover, .cat-tab.active {
+background: var(–ink); background-color: #1A1208;
+color: var(–bg);
+border-color: var(–ink);
+}
+
+.cat-tab.active {
+background: var(–gold); background-color: #B8860B;
+border-color: var(–gold);
+color: var(–ink);
+}
+
+/* WORD GRID */
+.word-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+gap: 20px;
+}
+
+/* WORD CARD */
+.word-card {
+background: var(–card);
+background-color: #FDFAF4;
+border: 1.5px solid #C8B89A;
+border-radius: 10px;
+padding: 20px;
+position: relative;
+transition: transform 0.18s, box-shadow 0.18s;
+animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(8px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.word-card:hover {
+transform: translateY(-2px);
+box-shadow: 0 6px 24px var(–shadow);
+}
+
+.card-top {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 12px;
+gap: 10px;
+}
+
+.card-left {
+flex: 1;
+}
+
+.word-de {
+font-family: Georgia, “Times New Roman”, serif;
+font-size: 21px;
+color: var(–ink);
+line-height: 1.2;
+}
+
+.word-ru {
+font-size: 14px;
+color: var(–ink2);
+margin-top: 3px;
+font-style: italic;
+}
+
+.cat-badge {
+font-size: 10px;
+font-weight: 600;
+padding: 3px 10px;
+border-radius: 12px;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+white-space: nowrap;
+}
+
+.cat-Глагол      { background: rgba(26,58,92,0.1);  color: var(–blue); }
+.cat-Существительное { background: rgba(45,90,39,0.1);  color: var(–green); }
+.cat-Прилагательное  { background: rgba(184,134,11,0.12); color: var(–gold); }
+.cat-Союз        { background: rgba(74,63,47,0.1);  color: var(–ink2); }
+.cat-Наречие     { background: rgba(139,37,0,0.1);  color: var(–red); }
+.cat-Другое      { background: rgba(100,100,100,0.1); color: #666; }
+
+/* VERB FORMS */
+.verb-forms {
+margin: 10px 0;
+background: rgba(26,58,92,0.04);
+border: 1px solid rgba(26,58,92,0.12);
+border-radius: 6px;
+padding: 10px 12px;
+}
+
+.verb-forms-title {
+font-size: 10px;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(–blue);
+font-weight: 600;
+margin-bottom: 7px;
+}
+
+.verb-grid {
+display: grid;
+grid-template-columns: auto 1fr;
+gap: 3px 10px;
+font-size: 12.5px;
+}
+
+.vf-label {
+color: var(–ink3);
+font-size: 11px;
+padding-top: 1px;
+}
+
+.vf-value {
+font-family: “Courier New”, Courier, monospace;
+color: var(–blue);
+font-size: 12px;
+}
+
+.case-badge {
+display: inline-block;
+margin-top: 7px;
+font-size: 10.5px;
+font-weight: 600;
+padding: 2px 9px;
+border-radius: 4px;
+letter-spacing: 0.05em;
+}
+
+.case-akkusativ { background: rgba(139,37,0,0.08); color: var(–red); }
+.case-dativ     { background: rgba(45,90,39,0.08); color: var(–green); }
+.case-both      { background: rgba(184,134,11,0.1); color: var(–gold); }
+.case-none      { background: rgba(100,100,100,0.08); color: #888; }
+
+/* PHRASES */
+.phrases {
+margin-top: 10px;
+}
+
+.phrases-title {
+font-size: 10px;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(–ink3);
+font-weight: 600;
+margin-bottom: 6px;
+}
+
+.phrase-item {
+font-size: 12.5px;
+padding: 4px 0;
+border-bottom: 1px dashed var(–border);
+display: flex;
+gap: 8px;
+}
+
+.phrase-item:last-child { border-bottom: none; }
+
+.phrase-de {
+color: var(–ink);
+font-weight: 500;
+min-width: 0;
+}
+
+.phrase-ru {
+color: var(–ink3);
+font-style: italic;
+min-width: 0;
+}
+
+.card-actions {
+position: absolute;
+top: 12px;
+right: 12px;
+display: flex;
+gap: 4px;
+}
+
+.btn-edit {
+background: transparent;
+border: none;
+color: var(–ink3);
+cursor: pointer;
+padding: 4px 6px;
+border-radius: 4px;
+font-size: 13px;
+transition: all 0.15s;
+}
+
+.btn-edit:hover { color: var(–gold); background: rgba(184,134,11,0.1); }
+
+/* MODAL */
+.modal-overlay {
+display: none;
+position: fixed;
+top: 0; left: 0; right: 0; bottom: 0;
+background-color: rgba(26,18,8,0.55);
+z-index: 200;
+align-items: center;
+justify-content: center;
+padding: 20px;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+background: var(–card);
+background-color: #FDFAF4;
+border: 1.5px solid #C8B89A;
+border-radius: 12px;
+padding: 32px;
+width: 100%;
+max-width: 560px;
+max-height: 90vh;
+overflow-y: auto;
+animation: modalIn 0.25s ease;
+}
+
+@keyframes modalIn {
+from { opacity: 0; transform: scale(0.96) translateY(10px); }
+to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-title {
+font-family: Georgia, “Times New Roman”, serif;
+font-size: 22px;
+margin-bottom: 24px;
+color: var(–ink);
+}
+
+.form-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 14px;
+margin-bottom: 14px;
+}
+
+.form-group {
+display: flex;
+flex-direction: column;
+gap: 5px;
+margin-bottom: 14px;
+}
+
+.form-group.full { grid-column: 1 / -1; }
+
+label {
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+color: var(–ink3);
+font-weight: 600;
+}
+
+input[type=“text”] { padding: 9px 12px; }
+textarea { padding: 9px 12px; resize: vertical; min-height: 70px; }
+
+.verb-section {
+background: rgba(26,58,92,0.04);
+border: 1px solid rgba(26,58,92,0.15);
+border-radius: 8px;
+padding: 16px;
+margin-bottom: 14px;
+display: none;
+}
+
+.verb-section.visible { display: block; }
+
+.verb-section-title {
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+color: var(–blue);
+font-weight: 600;
+margin-bottom: 12px;
+}
+
+.phrases-editor {
+margin-bottom: 14px;
+}
+
+.phrase-row {
+display: grid;
+grid-template-columns: 1fr 1fr 28px;
+gap: 8px;
+margin-bottom: 8px;
+align-items: center;
+}
+
+.btn-remove-phrase {
+background: transparent;
+border: 1px solid var(–border);
+color: var(–ink3);
+border-radius: 4px;
+width: 28px;
+height: 28px;
+cursor: pointer;
+font-size: 14px;
+line-height: 1;
+transition: all 0.15s;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.btn-remove-phrase:hover { color: var(–red); border-color: var(–red); }
+
+.modal-footer {
+display: flex;
+justify-content: flex-end;
+gap: 10px;
+margin-top: 20px;
+padding-top: 16px;
+border-top: 1px solid var(–border);
+}
+
+.empty-state {
+grid-column: 1 / -1;
+text-align: center;
+padding: 60px 20px;
+color: var(–ink3);
+}
+
+.empty-state-icon {
+font-size: 40px;
+margin-bottom: 12px;
+opacity: 0.4;
+}
+
+.empty-state-text {
+font-family: Georgia, “Times New Roman”, serif;
+font-size: 18px;
+margin-bottom: 6px;
+}
+
+.empty-state-sub {
+font-size: 13px;
+opacity: 0.7;
+}
+
+.divider {
+height: 1px;
+background: var(–border);
+margin: 10px 0;
+}
+
+@media (max-width: 600px) {
+header { padding: 18px 20px; }
+.container { padding: 20px 14px; }
+.form-row { grid-template-columns: 1fr; }
+.word-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-title">Мой немецкий словарь</div>
+    <div class="logo-sub">Deutsch · Russisch</div>
+  </div>
+  <div class="header-stats">
+    <div class="stat">
+      <div class="stat-num" id="total-count">0</div>
+      <div class="stat-label">слов</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="verb-count">0</div>
+      <div class="stat-label">глаголов</div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <!-- Controls -->
+  <div class="controls">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="search" placeholder="Поиск по немецкому или русскому...">
+    </div>
+    <select id="sort-select" style="width:auto;">
+      <option value="de">А–Я (нем.)</option>
+      <option value="ru">А–Я (рус.)</option>
+      <option value="newest">Новые</option>
+    </select>
+    <button class="btn btn-primary" onclick="openModal()">+ Добавить слово</button>
+  </div>
+
+  <!-- Category tabs -->
+
+  <div class="cat-tabs" id="cat-tabs"></div>
+
+  <!-- Word grid -->
+
+  <div class="word-grid" id="word-grid"></div>
+</div>
+
+<!-- MODAL -->
+
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">Добавить слово</div>
+
+```
+<div class="form-row">
+  <div class="form-group">
+    <label>Немецкое слово *</label>
+    <input type="text" id="f-de" placeholder="z.B. aufmachen">
+  </div>
+  <div class="form-group">
+    <label>Перевод (рус.) *</label>
+    <input type="text" id="f-ru" placeholder="открывать">
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group">
+    <label>Часть речи *</label>
+    <select id="f-cat" onchange="handleCatChange()">
+      <option value="Глагол">Глагол</option>
+      <option value="Существительное">Существительное</option>
+      <option value="Прилагательное">Прилагательное</option>
+      <option value="Союз">Союз</option>
+      <option value="Наречие">Наречие</option>
+      <option value="Другое">Другое</option>
+    </select>
+  </div>
+</div>
+
+<!-- VERB SECTION -->
+<div class="verb-section visible" id="verb-section">
+  <div class="verb-section-title">Глагольные формы</div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>3-е лицо ед.ч. (Präsens)</label>
+      <input type="text" id="f-p3" placeholder="z.B. macht auf">
+    </div>
+    <div class="form-group">
+      <label>Перфект (Partizip II)</label>
+      <input type="text" id="f-perf" placeholder="z.B. hat aufgemacht">
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Präteritum (3-е лицо)</label>
+    <input type="text" id="f-prät" placeholder="z.B. machte auf">
+  </div>
+  <div class="form-group">
+    <label>Управление (падеж объекта)</label>
+    <select id="f-case">
+      <option value="Akkusativ">Akkusativ (Аккузатив)</option>
+      <option value="Dativ">Dativ (Датив)</option>
+      <option value="Akkusativ / Dativ">Оба падежа</option>
+      <option value="—">Без дополнения</option>
+    </select>
+  </div>
+</div>
+
+<!-- PHRASES -->
+<div class="form-group">
+  <label>Словосочетания и примеры</label>
+</div>
+<div class="phrases-editor" id="phrases-editor"></div>
+<button class="btn btn-outline" onclick="addPhraseRow()" style="font-size:12px; padding:6px 14px; margin-bottom:14px;">+ Добавить словосочетание</button>
+
+<div class="form-group">
+  <label>Заметки (необязательно)</label>
+  <textarea id="f-notes" placeholder="Дополнительная информация..."></textarea>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-outline" onclick="closeModal()">Отмена</button>
+  <button class="btn btn-primary" onclick="saveWord()">Сохранить</button>
+</div>
+```
+
+  </div>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+
+const CATEGORIES = ['Все', 'Глагол', 'Существительное', 'Прилагательное', 'Союз', 'Наречие', 'Другое'];
+
+const INITIAL_WORDS = [
+  {
+    id: 1, de: 'aufmachen', ru: 'открывать, вскрывать',
+    cat: 'Глагол',
+    verbForms: { p3: 'macht auf', perf: 'hat aufgemacht', prät: 'machte auf' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'die Tür aufmachen', ru: 'открыть дверь' },
+      { de: 'ein Geschäft aufmachen', ru: 'открыть магазин' },
+      { de: 'ein Paket aufmachen', ru: 'вскрыть посылку' },
+    ],
+    notes: ''
+  },
+  {
+    id: 2, de: 'zumachen', ru: 'закрывать',
+    cat: 'Глагол',
+    verbForms: { p3: 'macht zu', perf: 'hat zugemacht', prät: 'machte zu' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'das Fenster zumachen', ru: 'закрыть окно' },
+      { de: 'den Koffer zumachen', ru: 'закрыть чемодан' },
+    ],
+    notes: ''
+  },
+  {
+    id: 3, de: 'anmachen', ru: 'включать; разжигать',
+    cat: 'Глагол',
+    verbForms: { p3: 'macht an', perf: 'hat angemacht', prät: 'machte an' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'das Licht anmachen', ru: 'включить свет' },
+      { de: 'den Computer anmachen', ru: 'включить компьютер' },
+      { de: 'den Grill anmachen', ru: 'разжечь гриль' },
+    ],
+    notes: 'Также разг.: флиртовать / приставать'
+  },
+  {
+    id: 4, de: 'ausmachen', ru: 'выключать; договариваться; составлять',
+    cat: 'Глагол',
+    verbForms: { p3: 'macht aus', perf: 'hat ausgemacht', prät: 'machte aus' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'das Licht ausmachen', ru: 'выключить свет' },
+      { de: 'einen Termin ausmachen', ru: 'договориться о встрече' },
+      { de: 'Das macht nichts aus.', ru: 'Это не имеет значения.' },
+    ],
+    notes: 'Многозначный глагол'
+  },
+  {
+    id: 5, de: 'sich unterhalten', ru: 'разговаривать, беседовать; развлекаться',
+    cat: 'Глагол',
+    verbForms: { p3: 'unterhält sich', perf: 'hat sich unterhalten', prät: 'unterhielt sich' },
+    verbCase: 'Dativ',
+    phrases: [
+      { de: 'sich mit jemandem unterhalten', ru: 'беседовать с кем-либо' },
+      { de: 'Wir haben uns gut unterhalten.', ru: 'Мы хорошо поговорили / повеселились.' },
+    ],
+    notes: 'Возвратный глагол. Управление: mit + Dativ'
+  },
+  {
+    id: 6, de: 'überlegen', ru: 'обдумывать, размышлять',
+    cat: 'Глагол',
+    verbForms: { p3: 'überlegt', perf: 'hat überlegt', prät: 'überlegte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'sich etwas überlegen', ru: 'подумать над чем-либо' },
+      { de: 'Ich muss es mir überlegen.', ru: 'Мне нужно подумать.' },
+    ],
+    notes: 'Неотделяемый глагол (über-)'
+  },
+  {
+    id: 7, de: 'fruchtbar', ru: 'плодородный; плодотворный',
+    cat: 'Прилагательное',
+    verbForms: null,
+    verbCase: null,
+    phrases: [
+      { de: 'fruchtbarer Boden', ru: 'плодородная почва' },
+      { de: 'eine fruchtbare Zusammenarbeit', ru: 'плодотворное сотрудничество' },
+    ],
+    notes: ''
+  },
+  {
+    id: 8, de: 'entdecken', ru: 'открывать, обнаруживать',
+    cat: 'Глагол',
+    verbForms: { p3: 'entdeckt', perf: 'hat entdeckt', prät: 'entdeckte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'ein Land entdecken', ru: 'открыть страну' },
+      { de: 'einen Fehler entdecken', ru: 'обнаружить ошибку' },
+    ],
+    notes: 'Неотделяемый глагол (ent-)'
+  },
+  {
+    id: 9, de: 'deswegen', ru: 'поэтому, из-за этого',
+    cat: 'Союз',
+    verbForms: null,
+    verbCase: null,
+    phrases: [
+      { de: 'Ich bin krank, deswegen komme ich nicht.', ru: 'Я болен, поэтому не приду.' },
+      { de: 'Deswegen bin ich hier.', ru: 'Вот почему я здесь.' },
+    ],
+    notes: 'Причинное наречие-союз. Инвертирует порядок слов.'
+  },
+  {
+    id: 10, de: 'nämlich', ru: 'а именно; ведь, потому что',
+    cat: 'Союз',
+    verbForms: null,
+    verbCase: null,
+    phrases: [
+      { de: 'Ich kann nicht kommen, ich bin nämlich krank.', ru: 'Я не могу прийти — я ведь болен.' },
+      { de: 'Es gibt drei Möglichkeiten, nämlich...', ru: 'Есть три варианта, а именно...' },
+    ],
+    notes: 'Стоит в середине предложения, НЕ инвертирует порядок слов.'
+  },
+  {
+    id: 11, de: 'erzählen', ru: 'рассказывать',
+    cat: 'Глагол',
+    verbForms: { p3: 'erzählt', perf: 'hat erzählt', prät: 'erzählte' },
+    verbCase: 'Dativ',
+    phrases: [
+      { de: 'jemandem eine Geschichte erzählen', ru: 'рассказать кому-либо историю' },
+      { de: 'Erzähl mir mehr!', ru: 'Расскажи мне больше!' },
+    ],
+    notes: 'Управление: jemandem (Dativ) etwas (Akkusativ) erzählen'
+  },
+  {
+    id: 12, de: 'wieso', ru: 'почему, зачем',
+    cat: 'Наречие',
+    verbForms: null,
+    verbCase: null,
+    phrases: [
+      { de: 'Wieso fragst du?', ru: 'Почему ты спрашиваешь?' },
+      { de: 'Wieso nicht?', ru: 'А почему бы и нет?' },
+    ],
+    notes: 'Синонимы: warum, weshalb. Wieso — чуть более разговорное.'
+  },
+  {
+    id: 13, de: 'verwenden', ru: 'использовать, применять',
+    cat: 'Глагол',
+    verbForms: { p3: 'verwendet', perf: 'hat verwendet', prät: 'verwendete' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'ein Wörterbuch verwenden', ru: 'использовать словарь' },
+      { de: 'Zeit auf etwas verwenden', ru: 'тратить время на что-либо' },
+    ],
+    notes: 'Синоним: benutzen, nutzen'
+  },
+  {
+    id: 14, de: 'erlauben', ru: 'разрешать, позволять',
+    cat: 'Глагол',
+    verbForms: { p3: 'erlaubt', perf: 'hat erlaubt', prät: 'erlaubte' },
+    verbCase: 'Dativ',
+    phrases: [
+      { de: 'jemandem etwas erlauben', ru: 'разрешить кому-либо что-либо' },
+      { de: 'Das ist hier nicht erlaubt.', ru: 'Это здесь не разрешено.' },
+    ],
+    notes: 'Управление: jemandem (Dativ) etwas erlauben'
+  },
+  {
+    id: 15, de: 'verbieten', ru: 'запрещать',
+    cat: 'Глагол',
+    verbForms: { p3: 'verbietet', perf: 'hat verboten', prät: 'verbot' },
+    verbCase: 'Dativ',
+    phrases: [
+      { de: 'jemandem etwas verbieten', ru: 'запретить кому-либо что-либо' },
+      { de: 'Rauchen ist hier verboten.', ru: 'Здесь запрещено курить.' },
+    ],
+    notes: 'Сильный глагол! verbieten – verbot – verboten'
+  },
+  {
+    id: 16, de: 'der Unterschied', ru: 'различие, разница, отличие',
+    cat: 'Существительное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'einen Unterschied machen', ru: 'иметь значение; проводить различие' },
+      { de: 'der Unterschied zwischen A und B', ru: 'разница между A и B' },
+      { de: 'Was ist der Unterschied?', ru: 'В чём разница?' },
+    ],
+    notes: 'der Unterschied, -e (муж. род)'
+  },
+  {
+    id: 17, de: 'unterschiedlich', ru: 'различный, разный, неодинаковый',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'unterschiedliche Meinungen', ru: 'различные мнения' },
+      { de: 'Das ist sehr unterschiedlich.', ru: 'Это очень по-разному.' },
+    ],
+    notes: 'Производное от der Unterschied'
+  },
+  {
+    id: 18, de: 'tatsächlich', ru: 'действительно, на самом деле; фактический',
+    cat: 'Наречие',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das ist tatsächlich so.', ru: 'Это действительно так.' },
+      { de: 'Hast du das tatsächlich gemacht?', ru: 'Ты правда это сделал?' },
+    ],
+    notes: 'Усиливает утверждение. Синоним: wirklich, in der Tat'
+  },
+  {
+    id: 19, de: 'hauptsächlich', ru: 'главным образом, преимущественно',
+    cat: 'Наречие',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'hauptsächlich wegen des Wetters', ru: 'главным образом из-за погоды' },
+      { de: 'Ich lese hauptsächlich Romane.', ru: 'Я читаю преимущественно романы.' },
+    ],
+    notes: 'Синоним: vor allem, überwiegend'
+  },
+  {
+    id: 20, de: 'irgendwas', ru: 'что-нибудь, что-то',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Kann ich irgendwas helfen?', ru: 'Могу я чем-нибудь помочь?' },
+      { de: 'Da stimmt irgendwas nicht.', ru: 'Что-то здесь не так.' },
+    ],
+    notes: 'Разговорная форма von irgendetwas. Используется в неформальной речи.'
+  },
+  {
+    id: 21, de: 'irgendwer', ru: 'кто-нибудь, кто-то',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Hat irgendwer angerufen?', ru: 'Кто-нибудь звонил?' },
+      { de: 'Irgendwer muss das wissen.', ru: 'Кто-то же должен это знать.' },
+    ],
+    notes: 'Разговорная форма von irgendjemand'
+  },
+  {
+    id: 22, de: 'irgendwann', ru: 'когда-нибудь, когда-то',
+    cat: 'Наречие',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das passiert irgendwann.', ru: 'Это когда-нибудь случится.' },
+      { de: 'Wir sehen uns irgendwann.', ru: 'Увидимся когда-нибудь.' },
+    ],
+    notes: 'Не указывает конкретное время. Ср.: irgendwann = когда-нибудь / manchmal = иногда'
+  },
+  {
+    id: 23, de: 'irgendwie', ru: 'как-нибудь, как-то, каким-то образом',
+    cat: 'Наречие',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das klappt irgendwie.', ru: 'Как-нибудь получится.' },
+      { de: 'Es war irgendwie seltsam.', ru: 'Это было как-то странно.' },
+    ],
+    notes: 'Часто выражает неопределённость или смягчает высказывание'
+  },
+  {
+    id: 24, de: 'überhaupt', ru: 'вообще; совсем; вообще-то',
+    cat: 'Наречие',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das stimmt überhaupt nicht.', ru: 'Это совсем неправда.' },
+      { de: 'Hast du überhaupt geschlafen?', ru: 'Ты вообще спал?' },
+      { de: 'Überhaupt, warum bist du hier?', ru: 'Вообще-то, почему ты здесь?' },
+    ],
+    notes: 'überhaupt nicht = совсем нет / überhaupt kein = вообще никакого'
+  },
+  {
+    id: 25, de: 'übrigens', ru: 'кстати, между прочим',
+    cat: 'Наречие',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Übrigens, ich habe Anna gesehen.', ru: 'Кстати, я видел Анну.' },
+      { de: 'Das ist übrigens sehr interessant.', ru: 'Это, между прочим, очень интересно.' },
+    ],
+    notes: 'Стоит в начале предложения или в середине. Инвертирует порядок слов если в начале.'
+  },
+  {
+    id: 26, de: 'halt', ru: 'просто, ну, вот (частица)',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das ist halt so.', ru: 'Ну, вот так оно и есть.' },
+      { de: 'Ich kann halt nicht kommen.', ru: 'Я просто не могу прийти.' },
+    ],
+    notes: 'Модальная частица южнонемецкого/австрийского варианта. В северной Германии аналог — eben. Выражает смирение с ситуацией.'
+  },
+  {
+    id: 27, de: 'eben', ru: 'именно, как раз; ну вот (частица)',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das ist eben das Problem.', ru: 'Вот именно в этом и проблема.' },
+      { de: 'Ich hab\'s dir eben gesagt.', ru: 'Я тебе только что сказал.' },
+      { de: 'Na eben!', ru: 'Вот именно! / Ну и вот!' },
+    ],
+    notes: 'Два значения: 1) модальная частица (= halt) 2) наречие времени = только что'
+  },
+  {
+    id: 28, de: 'Das macht Sinn', ru: 'это имеет смысл, это логично',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das macht total Sinn.', ru: 'Это абсолютно логично.' },
+      { de: 'Das macht keinen Sinn.', ru: 'Это не имеет смысла.' },
+    ],
+    notes: 'Калька с английского "makes sense". Нормативный вариант: Das ergibt Sinn / Das hat Sinn. Выражение "macht Sinn" широко распространено в разговорной речи.'
+  },
+  {
+    id: 29, de: 'auf jeden Fall', ru: 'в любом случае, обязательно, непременно',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Ich komme auf jeden Fall.', ru: 'Я приду в любом случае.' },
+      { de: 'Auf jeden Fall musst du das sehen!', ru: 'Ты обязательно должен это увидеть!' },
+    ],
+    notes: 'Синонимы: sicherlich, definitiv, unbedingt'
+  },
+  {
+    id: 30, de: 'auf keinen Fall', ru: 'ни в коем случае, никогда',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das mache ich auf keinen Fall.', ru: 'Я ни в коем случае этого не сделаю.' },
+      { de: 'Auf keinen Fall!', ru: 'Ни за что! / Ни в коем случае!' },
+    ],
+    notes: 'Антоним: auf jeden Fall. Очень категоричное отрицание.'
+  },
+  {
+    id: 31, de: 'krass', ru: 'крутой, жёсткий, грубый; (разг.) невероятный',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das ist ja krass!', ru: 'Вот это да! / Это жёстко!' },
+      { de: 'ein krasser Unterschied', ru: 'разительное различие' },
+      { de: 'krass falsch liegen', ru: 'грубо ошибаться' },
+    ],
+    notes: 'В разговорной речи — восторг или шок. В формальном языке — резкий, явный (krasser Widerspruch = явное противоречие).'
+  },
+  {
+    id: 32, de: 'lassen', ru: 'позволять, оставлять; заставлять; давать',
+    cat: 'Глагол',
+    verbForms: { p3: 'lässt', perf: 'hat gelassen / hat lassen', prät: 'ließ' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'jemanden etwas machen lassen', ru: 'позволить/заставить кого-то сделать что-то' },
+      { de: 'Lass mich in Ruhe!', ru: 'Оставь меня в покое!' },
+      { de: 'Das lässt sich machen.', ru: 'Это можно сделать.' },
+      { de: 'Ich lasse das Auto waschen.', ru: 'Я отдаю машину в мойку.' },
+    ],
+    notes: 'Сильный глагол. В перфекте с инфинитивом: hat lassen (Er hat ihn kommen lassen). Одиночно: hat gelassen.'
+  },
+  {
+    id: 33, de: 'klappen', ru: 'получаться, удаваться; складываться',
+    cat: 'Глагол',
+    verbForms: { p3: 'klappt', perf: 'hat geklappt', prät: 'klappte' },
+    verbCase: '—',
+    phrases: [
+      { de: 'Hat es geklappt?', ru: 'Получилось?' },
+      { de: 'Es klappt nicht.', ru: 'Не получается.' },
+      { de: 'Alles hat wunderbar geklappt.', ru: 'Всё прошло замечательно.' },
+    ],
+    notes: 'Безличный/непереходный глагол. Без прямого объекта.'
+  },
+  {
+    id: 34, de: 'nerven', ru: 'раздражать, надоедать, действовать на нервы',
+    cat: 'Глагол',
+    verbForms: { p3: 'nervt', perf: 'hat genervt', prät: 'nervte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'Du nervst mich!', ru: 'Ты меня раздражаешь!' },
+      { de: 'Das nervt total.', ru: 'Это жутко раздражает.' },
+      { de: 'Hör auf, mich zu nerven!', ru: 'Прекрати меня доставать!' },
+    ],
+    notes: 'Разговорный глагол. Genervt sein = быть раздражённым / не в духе.'
+  },
+  {
+    id: 35, de: 'erinnern', ru: 'напоминать (кому-то о чём-то)',
+    cat: 'Глагол',
+    verbForms: { p3: 'erinnert', perf: 'hat erinnert', prät: 'erinnerte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'jemanden an etwas erinnern', ru: 'напомнить кому-то о чём-то' },
+      { de: 'Er erinnert mich an meinen Vater.', ru: 'Он напоминает мне моего отца.' },
+    ],
+    notes: 'Управление: jemanden (Akk.) an etwas (Akk.) erinnern. Не путать с sich erinnern!'
+  },
+  {
+    id: 36, de: 'sich erinnern', ru: 'помнить, вспоминать (самому)',
+    cat: 'Глагол',
+    verbForms: { p3: 'erinnert sich', perf: 'hat sich erinnert', prät: 'erinnerte sich' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'sich an etwas erinnern', ru: 'помнить / вспоминать что-то' },
+      { de: 'Ich erinnere mich nicht daran.', ru: 'Я этого не помню.' },
+      { de: 'Erinnerst du dich noch?', ru: 'Ты ещё помнишь?' },
+    ],
+    notes: 'Возвратный глагол. Управление: sich (Akk.) an etwas (Akk.) erinnern.'
+  },
+  {
+    id: 37, de: 'bezweifeln', ru: 'сомневаться, подвергать сомнению',
+    cat: 'Глагол',
+    verbForms: { p3: 'bezweifelt', perf: 'hat bezweifelt', prät: 'bezweifelte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'Ich bezweifle das.', ru: 'Я в этом сомневаюсь.' },
+      { de: 'Das lässt sich kaum bezweifeln.', ru: 'В этом едва ли можно сомневаться.' },
+      { de: 'Er bezweifelt ihre Aussage.', ru: 'Он ставит под сомнение её слова.' },
+    ],
+    notes: 'Неотделяемый глагол (be-). Синоним: zweifeln an + Dativ.'
+  },
+  {
+    id: 38, de: 'bemerken', ru: 'замечать, обнаруживать; замечать (говорить)',
+    cat: 'Глагол',
+    verbForms: { p3: 'bemerkt', perf: 'hat bemerkt', prät: 'bemerkte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'einen Fehler bemerken', ru: 'заметить ошибку' },
+      { de: 'Hast du das bemerkt?', ru: 'Ты это заметил?' },
+      { de: 'Er bemerkte dazu nichts.', ru: 'Он по этому поводу ничего не заметил/сказал.' },
+    ],
+    notes: 'Неотделяемый глагол (be-). Два значения: замечать (видеть) и замечать (говорить).'
+  },
+  {
+    id: 39, de: 'vorstellen', ru: 'представлять, знакомить; представлять себе',
+    cat: 'Глагол',
+    verbForms: { p3: 'stellt vor', perf: 'hat vorgestellt', prät: 'stellte vor' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'jemanden vorstellen', ru: 'представить кого-то (познакомить)' },
+      { de: 'sich etwas vorstellen', ru: 'представить себе что-то' },
+      { de: 'Ich kann mir das nicht vorstellen.', ru: 'Я не могу себе это представить.' },
+      { de: 'Darf ich mich vorstellen?', ru: 'Позвольте представиться?' },
+    ],
+    notes: 'Отделяемый глагол (vor-). Sich vorstellen = представлять себе / представляться.'
+  },
+  {
+    id: 40, de: 'versuchen', ru: 'пытаться, пробовать',
+    cat: 'Глагол',
+    verbForms: { p3: 'versucht', perf: 'hat versucht', prät: 'versuchte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'etwas zu tun versuchen', ru: 'пытаться что-то сделать' },
+      { de: 'Ich habe es versucht.', ru: 'Я пытался / попробовал.' },
+      { de: 'Versuch es mal!', ru: 'Попробуй-ка!' },
+    ],
+    notes: 'Неотделяемый глагол (ver-). С инфинитивом: versuchen + zu + Infinitiv.'
+  },
+  {
+    id: 41, de: 'ärgern', ru: 'злить, раздражать; сердить',
+    cat: 'Глагол',
+    verbForms: { p3: 'ärgert', perf: 'hat geärgert', prät: 'ärgerte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'jemanden ärgern', ru: 'злить / дразнить кого-то' },
+      { de: 'sich über etwas ärgern', ru: 'злиться на что-то / из-за чего-то' },
+      { de: 'Das ärgert mich sehr.', ru: 'Это меня очень злит.' },
+    ],
+    notes: 'Sich ärgern über + Akk. = злиться на/из-за. Geärgert sein = быть раздражённым.'
+  },
+  {
+    id: 42, de: 'langweilen', ru: 'скучать; наводить скуку',
+    cat: 'Глагол',
+    verbForms: { p3: 'langweilt', perf: 'hat gelangweilt', prät: 'langweilte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'sich langweilen', ru: 'скучать' },
+      { de: 'Ich langweile mich.', ru: 'Мне скучно.' },
+      { de: 'Der Film hat mich gelangweilt.', ru: 'Фильм меня наскучил.' },
+    ],
+    notes: 'Sich langweilen = скучать. Jemanden langweilen = наводить на кого-то скуку.'
+  },
+  {
+    id: 43, de: 'aussehen', ru: 'выглядеть',
+    cat: 'Глагол',
+    verbForms: { p3: 'sieht aus', perf: 'hat ausgesehen', prät: 'sah aus' },
+    verbCase: '—',
+    phrases: [
+      { de: 'Du siehst gut aus.', ru: 'Ты хорошо выглядишь.' },
+      { de: 'Wie siehst du aus?', ru: 'Как ты выглядишь? / На кого ты похож?' },
+      { de: 'Es sieht nach Regen aus.', ru: 'Похоже, будет дождь.' },
+    ],
+    notes: 'Отделяемый сильный глагол (aus-). sehen – sah – gesehen. Без прямого объекта.'
+  },
+  {
+    id: 44, de: 'unbedingt', ru: 'непременно, обязательно; безусловно',
+    cat: 'Наречие',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das musst du unbedingt sehen!', ru: 'Ты обязательно должен это увидеть!' },
+      { de: 'Ich will das unbedingt machen.', ru: 'Я очень хочу это сделать.' },
+      { de: 'nicht unbedingt', ru: 'не обязательно' },
+    ],
+    notes: 'Синоним: auf jeden Fall (но unbedingt сильнее выражает желание/необходимость).'
+  },
+  {
+    id: 45, de: 'ändern', ru: 'менять, изменять',
+    cat: 'Глагол',
+    verbForms: { p3: 'ändert', perf: 'hat geändert', prät: 'änderte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'etwas ändern', ru: 'изменить что-то' },
+      { de: 'sich ändern', ru: 'измениться (самому)' },
+      { de: 'Das ändert nichts.', ru: 'Это ничего не меняет.' },
+      { de: 'die Meinung ändern', ru: 'изменить мнение' },
+    ],
+    notes: 'Sich ändern = измениться. Ср.: verändern (более глубокое изменение).'
+  },
+  {
+    id: 46, de: 'reif', ru: 'зрелый, спелый; готовый',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'reife Früchte', ru: 'спелые фрукты' },
+      { de: 'ein reifer Mensch', ru: 'зрелый человек' },
+      { de: 'Die Zeit ist reif.', ru: 'Время пришло / Время созрело.' },
+      { de: 'reif für die Insel', ru: 'разг.: на грани нервного срыва' },
+    ],
+    notes: 'Антоним: unreif (незрелый). Переносное значение: морально/эмоционально зрелый.'
+  },
+  {
+    id: 47, de: 'Recht haben', ru: 'быть правым',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Du hast Recht.', ru: 'Ты прав.' },
+      { de: 'Ich hatte Recht.', ru: 'Я был прав.' },
+      { de: 'Er hat damit Recht.', ru: 'Он в этом прав.' },
+    ],
+    notes: 'Устойчивое выражение. Recht = существительное, пишется с большой буквы. Антоним: Unrecht haben = быть неправым.'
+  },
+  {
+    id: 48, de: 'Das bringt nichts', ru: 'это ни к чему не приведёт; это бесполезно',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das bringt doch nichts!', ru: 'Это же ни к чему не приведёт!' },
+      { de: 'Es bringt nichts, darüber zu streiten.', ru: 'Нет смысла об этом спорить.' },
+    ],
+    notes: 'Разговорное выражение. Глагол bringen: bringt – brachte – hat gebracht.'
+  },
+  {
+    id: 49, de: 'ursprünglich', ru: 'первоначально, изначально; исходный',
+    cat: 'Наречие',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Ursprünglich wollte ich bleiben.', ru: 'Изначально я хотел остаться.' },
+      { de: 'die ursprüngliche Idee', ru: 'первоначальная идея' },
+      { de: 'im ursprünglichen Sinne', ru: 'в исходном смысле' },
+    ],
+    notes: 'Также прилагательное: der ursprüngliche Plan = исходный план.'
+  },
+  {
+    id: 50, de: 'am Überlegen sein', ru: 'обдумывать, раздумывать (в данный момент)',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Ich bin am Überlegen.', ru: 'Я сейчас думаю / прикидываю.' },
+      { de: 'Er ist noch am Überlegen, was er macht.', ru: 'Он ещё думает, что делать.' },
+    ],
+    notes: 'Разговорная конструкция: am + субстантивированный инфинитив + sein. Выражает процесс действия (аналог Verlaufsform).'
+  },
+  {
+    id: 51, de: 'quatschen', ru: 'болтать, трепаться; говорить чепуху',
+    cat: 'Глагол',
+    verbForms: { p3: 'quatscht', perf: 'hat gequatscht', prät: 'quatschte' },
+    verbCase: '—',
+    phrases: [
+      { de: 'Wir haben stundenlang gequatscht.', ru: 'Мы часами болтали.' },
+      { de: 'Quatsch keinen Unsinn!', ru: 'Не говори чепухи!' },
+      { de: 'mit jemandem quatschen', ru: 'трепаться с кем-то' },
+    ],
+    notes: 'Разговорный глагол. Der Quatsch = чепуха, ерунда.'
+  },
+  {
+    id: 52, de: 'gehören', ru: 'принадлежать; относиться к',
+    cat: 'Глагол',
+    verbForms: { p3: 'gehört', perf: 'hat gehört', prät: 'gehörte' },
+    verbCase: 'Dativ',
+    phrases: [
+      { de: 'Das gehört mir.', ru: 'Это принадлежит мне.' },
+      { de: 'Das gehört zur Familie.', ru: 'Это часть семьи / относится к семье.' },
+      { de: 'Das gehört sich nicht.', ru: 'Так не принято / это неприлично.' },
+    ],
+    notes: 'Управление: jemandem (Dativ) gehören. Не путать с hören (слушать)!'
+  },
+  {
+    id: 53, de: 'vertrauen', ru: 'доверять',
+    cat: 'Глагол',
+    verbForms: { p3: 'vertraut', perf: 'hat vertraut', prät: 'vertraute' },
+    verbCase: 'Dativ',
+    phrases: [
+      { de: 'jemandem vertrauen', ru: 'доверять кому-то' },
+      { de: 'Ich vertraue dir.', ru: 'Я тебе доверяю.' },
+      { de: 'auf jemanden vertrauen', ru: 'полагаться на кого-то' },
+    ],
+    notes: 'Управление: jemandem (Dativ) vertrauen. Das Vertrauen = доверие (сущ.).'
+  },
+  {
+    id: 54, de: 'angenehm', ru: 'приятный, приятно',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Sehr angenehm!', ru: 'Очень приятно! (при знакомстве)' },
+      { de: 'ein angenehmes Gespräch', ru: 'приятный разговор' },
+      { de: 'angenehm warm', ru: 'приятно тепло' },
+    ],
+    notes: 'Антоним: unangenehm (неприятный). Используется и как формула знакомства.'
+  },
+  {
+    id: 55, de: 'schaffen', ru: '1) справляться, успевать 2) создавать',
+    cat: 'Глагол',
+    verbForms: { p3: 'schafft', perf: 'hat geschafft / hat geschaffen', prät: 'schaffte / schuf' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'Das habe ich geschafft!', ru: 'Я справился! Мне удалось!' },
+      { de: 'Ich schaffe das nicht.', ru: 'Я с этим не справлюсь.' },
+      { de: 'Arbeitsplätze schaffen', ru: 'создавать рабочие места' },
+    ],
+    notes: 'Два разных глагола! 1) schaffen (справляться) — слабый: schaffte / geschafft. 2) schaffen (творить/создавать) — сильный: schuf / geschaffen.'
+  },
+  {
+    id: 56, de: 'kriegen', ru: 'получать, доставать; поймать (разг.)',
+    cat: 'Глагол',
+    verbForms: { p3: 'kriegt', perf: 'hat gekriegt', prät: 'kriegte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'Ich kriege das hin.', ru: 'Я с этим справлюсь / у меня получится.' },
+      { de: 'ein Kind kriegen', ru: 'родить ребёнка (разг.)' },
+      { de: 'Ich kriege keinen Termin.', ru: 'Я не могу записаться / получить талон.' },
+    ],
+    notes: 'Разговорный синоним bekommen. В формальной речи предпочтительнее bekommen.'
+  },
+  {
+    id: 57, de: 'bekommen', ru: 'получать, получить',
+    cat: 'Глагол',
+    verbForms: { p3: 'bekommt', perf: 'hat bekommen', prät: 'bekam' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'ein Geschenk bekommen', ru: 'получить подарок' },
+      { de: 'Hunger bekommen', ru: 'проголодаться' },
+      { de: 'Das bekommt mir gut.', ru: 'Мне это идёт на пользу.' },
+    ],
+    notes: 'Сильный глагол. Осторожно: bekommen ≠ англ. "become" (стать = werden)!'
+  },
+  {
+    id: 58, de: 'anhaben', ru: 'иметь на себе (одежду), быть одетым в',
+    cat: 'Глагол',
+    verbForms: { p3: 'hat an', perf: 'hat angehabt', prät: 'hatte an' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'Was hast du heute an?', ru: 'Во что ты сегодня одет?' },
+      { de: 'Sie hat ein rotes Kleid an.', ru: 'На ней красное платье.' },
+      { de: 'Er hatte nichts an.', ru: 'На нём ничего не было.' },
+    ],
+    notes: 'Отделяемый глагол (an-). Используется только для одежды/аксессуаров на теле.'
+  },
+  {
+    id: 59, de: 'ziehen', ru: 'тянуть, тащить; переезжать; ходить (в игре)',
+    cat: 'Глагол',
+    verbForms: { p3: 'zieht', perf: 'hat gezogen / ist gezogen', prät: 'zog' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'an etwas ziehen', ru: 'тянуть что-то' },
+      { de: 'nach Berlin ziehen', ru: 'переехать в Берлин' },
+      { de: 'Es zieht hier.', ru: 'Здесь сквозняк.' },
+      { de: 'Schlüsse ziehen', ru: 'делать выводы' },
+    ],
+    notes: 'Сильный глагол. С haben: тянуть (hat gezogen). С sein: переезжать (ist gezogen). Многозначный!'
+  },
+  {
+    id: 60, de: 'tragen', ru: 'носить (одежду); нести; переносить',
+    cat: 'Глагол',
+    verbForms: { p3: 'trägt', perf: 'hat getragen', prät: 'trug' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'eine Jacke tragen', ru: 'носить куртку' },
+      { de: 'schwere Taschen tragen', ru: 'нести тяжёлые сумки' },
+      { de: 'Verantwortung tragen', ru: 'нести ответственность' },
+    ],
+    notes: 'Сильный глагол с умлаутом: trägt, trug, getragen. Многозначный: носить одежду, нести груз, нести ответственность.'
+  },
+  {
+    id: 61, de: 'bequem', ru: 'удобный, комфортный; ленивый (о человеке)',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'bequeme Schuhe', ru: 'удобная обувь' },
+      { de: 'Mach es dir bequem!', ru: 'Располагайся поудобнее!' },
+      { de: 'Er ist zu bequem.', ru: 'Он слишком ленив.' },
+    ],
+    notes: 'Антоним: unbequem (неудобный). О человеке — ленивый, предпочитающий комфорт.'
+  },
+  {
+    id: 62, de: 'vorbereiten', ru: 'подготавливать, готовить',
+    cat: 'Глагол',
+    verbForms: { p3: 'bereitet vor', perf: 'hat vorbereitet', prät: 'bereitete vor' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'sich auf etwas vorbereiten', ru: 'готовиться к чему-то' },
+      { de: 'ein Referat vorbereiten', ru: 'подготовить доклад' },
+      { de: 'Ich habe mich gut vorbereitet.', ru: 'Я хорошо подготовился.' },
+    ],
+    notes: 'Отделяемый глагол (vor-). Sich vorbereiten auf + Akk. = готовиться к чему-то.'
+  },
+  {
+    id: 63, de: 'bereit', ru: 'готовый, готов',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Bist du bereit?', ru: 'Ты готов?' },
+      { de: 'bereit sein, etwas zu tun', ru: 'быть готовым сделать что-то' },
+      { de: 'sich bereit erklären', ru: 'изъявить готовность' },
+    ],
+    notes: 'Синоним: fertig (в значении "готов"). Bereit часто сочетается с zu + Infinitiv.'
+  },
+  {
+    id: 64, de: 'furchtbar', ru: 'ужасный, страшный; ужасно (разг. усилитель)',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das ist furchtbar!', ru: 'Это ужасно!' },
+      { de: 'furchtbar müde sein', ru: 'быть ужасно уставшим' },
+      { de: 'ein furchtbares Wetter', ru: 'ужасная погода' },
+    ],
+    notes: 'Синонимы: schrecklich, fürchterlich. В разговорной речи часто как усилитель: furchtbar nett = ужасно мило.'
+  },
+  {
+    id: 65, de: 'höflich', ru: 'вежливый, учтивый',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'höflich fragen', ru: 'вежливо спросить' },
+      { de: 'Es ist nicht höflich, das zu sagen.', ru: 'Это невежливо — так говорить.' },
+      { de: 'höflich aber bestimmt', ru: 'вежливо, но настойчиво' },
+    ],
+    notes: 'Антоним: unhöflich (невежливый). Die Höflichkeit = вежливость (сущ.).'
+  },
+  {
+    id: 66, de: 'gewinnen', ru: 'выигрывать, побеждать; получать',
+    cat: 'Глагол',
+    verbForms: { p3: 'gewinnt', perf: 'hat gewonnen', prät: 'gewann' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'ein Spiel gewinnen', ru: 'выиграть игру' },
+      { de: 'an Bedeutung gewinnen', ru: 'приобретать значение' },
+      { de: 'Zeit gewinnen', ru: 'выигрывать время' },
+    ],
+    notes: 'Сильный глагол: gewinnt – gewann – gewonnen. Антоним: verlieren.'
+  },
+  {
+    id: 67, de: 'verlieren', ru: 'терять, проигрывать',
+    cat: 'Глагол',
+    verbForms: { p3: 'verliert', perf: 'hat verloren', prät: 'verlor' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'ein Spiel verlieren', ru: 'проиграть игру' },
+      { de: 'den Schlüssel verlieren', ru: 'потерять ключ' },
+      { de: 'die Geduld verlieren', ru: 'потерять терпение' },
+    ],
+    notes: 'Сильный глагол: verliert – verlor – verloren. Антоним: gewinnen / finden.'
+  },
+  {
+    id: 68, de: 'der Fehler', ru: 'ошибка, погрешность',
+    cat: 'Существительное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'einen Fehler machen', ru: 'допустить ошибку' },
+      { de: 'Fehler zugeben', ru: 'признать ошибку' },
+      { de: 'Das war mein Fehler.', ru: 'Это была моя ошибка.' },
+    ],
+    notes: 'der Fehler, – (муж. род, мн.ч. die Fehler). Fehlerfrei = без ошибок.'
+  },
+  {
+    id: 69, de: 'sich verlesen', ru: 'ошибиться при чтении; зачитать (офиц.)',
+    cat: 'Глагол',
+    verbForms: { p3: 'verliest sich', perf: 'hat sich verlesen', prät: 'verlas sich' },
+    verbCase: '—',
+    phrases: [
+      { de: 'Ich habe mich verlesen.', ru: 'Я ошибся при чтении / неправильно прочитал.' },
+      { de: 'Entschuldigung, ich habe mich verlesen.', ru: 'Извините, я неправильно прочитал.' },
+    ],
+    notes: 'Сильный возвратный глагол: verliest – verlas – verlesen. Приставка ver- часто указывает на ошибку в действии.'
+  },
+  {
+    id: 70, de: 'irgendein', ru: 'какой-нибудь, какой-то (один)',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Hast du irgendein Problem?', ru: 'У тебя есть какая-нибудь проблема?' },
+      { de: 'irgendeinen Grund haben', ru: 'иметь какую-нибудь причину' },
+      { de: 'Irgendein Mensch hat angerufen.', ru: 'Какой-то человек звонил.' },
+    ],
+    notes: 'Склоняется как ein/eine/ein. Указывает на неопределённость без уточнения. Ср.: irgendwelche (мн.ч.).'
+  },
+  {
+    id: 71, de: 'irgendetwas', ru: 'что-нибудь, что-то (нейтральная форма)',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Möchtest du irgendetwas essen?', ru: 'Хочешь что-нибудь поесть?' },
+      { de: 'Irgendetwas stimmt nicht.', ru: 'Что-то не так.' },
+    ],
+    notes: 'Формальный/нейтральный вариант irgendwas. Оба варианта корректны, irgendwas — разговорнее.'
+  },
+  {
+    id: 72, de: 'echt', ru: 'настоящий, подлинный; реально, правда (разг.)',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'echtes Gold', ru: 'настоящее золото' },
+      { de: 'Das ist echt toll!', ru: 'Это реально здорово!' },
+      { de: 'Echt? / Ist das echt?', ru: 'Правда? / Серьёзно?' },
+    ],
+    notes: 'В разговорной речи — усилитель (= wirklich, tatsächlich). Антоним: unecht, gefälscht (поддельный).'
+  },
+  {
+    id: 73, de: 'einzig', ru: 'единственный; единственно',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'das einzige Problem', ru: 'единственная проблема' },
+      { de: 'die einzig richtige Lösung', ru: 'единственно верное решение' },
+      { de: 'kein einziges Mal', ru: 'ни единого раза' },
+    ],
+    notes: 'Используется только с артиклем или отрицанием. Alleinig — синоним в более официальном стиле.'
+  },
+  {
+    id: 74, de: 'eigen', ru: 'собственный, свой',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'mein eigenes Zimmer', ru: 'моя собственная комната' },
+      { de: 'auf eigene Kosten', ru: 'за свой счёт' },
+      { de: 'eine eigene Meinung haben', ru: 'иметь собственное мнение' },
+    ],
+    notes: 'Всегда используется с притяжательным местоимением: mein eigenes, sein eigenes и т.д. Eigenartig = своеобразный, странный.'
+  },
+  {
+    id: 75, de: 'ausleihen', ru: 'брать напрокат; одалживать (кому-то)',
+    cat: 'Глагол',
+    verbForms: { p3: 'leiht aus', perf: 'hat ausgeliehen', prät: 'lieh aus' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'ein Buch ausleihen', ru: 'взять книгу (в библиотеке)' },
+      { de: 'jemandem Geld ausleihen', ru: 'одолжить кому-то деньги' },
+      { de: 'sich ein Auto ausleihen', ru: 'взять машину напрокат' },
+    ],
+    notes: 'Отделяемый сильный глагол (aus-): leiht – lieh – geliehen. Sich ausleihen = брать у кого-то. Jemandem ausleihen = давать кому-то.'
+  },
+  {
+    id: 76, de: 'stören', ru: 'мешать, беспокоить, нарушать',
+    cat: 'Глагол',
+    verbForms: { p3: 'stört', perf: 'hat gestört', prät: 'störte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'Stört es dich, wenn ich...?', ru: 'Тебя не беспокоит, если я...?' },
+      { de: 'Bitte nicht stören!', ru: 'Просьба не беспокоить!' },
+      { de: 'Das stört mich nicht.', ru: 'Меня это не беспокоит.' },
+    ],
+    notes: 'Die Störung = помеха, перебой. Ungestört = без помех, спокойно.'
+  },
+  {
+    id: 77, de: 'vereinbaren', ru: 'договариваться, согласовывать',
+    cat: 'Глагол',
+    verbForms: { p3: 'vereinbart', perf: 'hat vereinbart', prät: 'vereinbarte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'einen Termin vereinbaren', ru: 'договориться о встрече / записаться' },
+      { de: 'Wir haben das vereinbart.', ru: 'Мы об этом договорились.' },
+      { de: 'Regeln vereinbaren', ru: 'согласовать правила' },
+    ],
+    notes: 'Неотделяемый глагол (ver-). Более официально, чем ausmachen. Die Vereinbarung = договорённость, соглашение.'
+  },
+  {
+    id: 78, de: 'schwül', ru: 'душный, знойный (о влажной жаре)',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Es ist sehr schwül heute.', ru: 'Сегодня очень душно.' },
+      { de: 'schwüles Wetter', ru: 'душная погода' },
+      { de: 'schwül und drückend', ru: 'душно и давяще' },
+    ],
+    notes: 'Только о влажной, тяжёлой жаре. Не путать с schwul (разг. гомосексуальный) — разные слова!'
+  },
+  {
+    id: 79, de: 'einladen', ru: 'приглашать; угощать (платить за кого-то)',
+    cat: 'Глагол',
+    verbForms: { p3: 'lädt ein', perf: 'hat eingeladen', prät: 'lud ein' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'jemanden einladen', ru: 'пригласить кого-то' },
+      { de: 'Ich lade dich ein!', ru: 'Я угощаю! / Я плачу!' },
+      { de: 'zur Party eingeladen werden', ru: 'быть приглашённым на вечеринку' },
+    ],
+    notes: 'Отделяемый сильный глагол (ein-): lädt ein – lud ein – eingeladen. Два значения: приглашать и угощать (брать на себя счёт).'
+  },
+  {
+    id: 80, de: 'unmöglich', ru: 'невозможный; невозможно; (разг.) ужасный',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Das ist unmöglich!', ru: 'Это невозможно!' },
+      { de: 'ein unmögliches Verhalten', ru: 'ужасное/недопустимое поведение' },
+      { de: 'Es ist unmöglich, das zu schaffen.', ru: 'Невозможно с этим справиться.' },
+    ],
+    notes: 'Антоним: möglich (возможный). В разговорной речи также = неприемлемый, ужасный.'
+  },
+  {
+    id: 81, de: 'sich erholen', ru: 'восстанавливаться, отдыхать, приходить в себя',
+    cat: 'Глагол',
+    verbForms: { p3: 'erholt sich', perf: 'hat sich erholt', prät: 'erholte sich' },
+    verbCase: '—',
+    phrases: [
+      { de: 'sich vom Stress erholen', ru: 'восстановиться после стресса' },
+      { de: 'Ich erhole mich gerade.', ru: 'Я сейчас отдыхаю / прихожу в себя.' },
+      { de: 'gut erholt aussehen', ru: 'выглядеть хорошо отдохнувшим' },
+    ],
+    notes: 'Возвратный глагол. Die Erholung = отдых, восстановление. Глубже, чем ausruhen — подразумевает восстановление сил.'
+  },
+  {
+    id: 82, de: 'ausruhen', ru: 'отдыхать, передохнуть',
+    cat: 'Глагол',
+    verbForms: { p3: 'ruht aus', perf: 'hat ausgeruht', prät: 'ruhte aus' },
+    verbCase: '—',
+    phrases: [
+      { de: 'sich ausruhen', ru: 'отдохнуть, передохнуть' },
+      { de: 'Ich muss mich kurz ausruhen.', ru: 'Мне нужно немного отдохнуть.' },
+      { de: 'die Beine ausruhen', ru: 'дать ногам отдых' },
+    ],
+    notes: 'Отделяемый глагол (aus-). Краткий отдых, пауза. Ср.: sich erholen = более глубокое восстановление.'
+  },
+  {
+    id: 83, de: 'entspannt', ru: 'расслабленный, спокойный; расслабленно',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'entspannt sein', ru: 'быть расслабленным' },
+      { de: 'ein entspannter Abend', ru: 'спокойный вечер' },
+      { de: 'Das sehe ich entspannt.', ru: 'Я отношусь к этому спокойно.' },
+    ],
+    notes: 'Partizip II от sich entspannen (расслабляться). Антоним: angespannt (напряжённый).'
+  },
+  {
+    id: 84, de: 'gespannt', ru: 'напряжённый; любопытный, в ожидании',
+    cat: 'Прилагательное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Ich bin gespannt!', ru: 'Мне любопытно! / Жду с нетерпением!' },
+      { de: 'gespannt auf etwas sein', ru: 'с нетерпением ждать чего-то' },
+      { de: 'eine gespannte Lage', ru: 'напряжённая обстановка' },
+    ],
+    notes: 'Два значения: 1) напряжённый (физически/политически) 2) с нетерпением ожидающий. Антоним: entspannt.'
+  },
+  {
+    id: 85, de: 'bestimmen', ru: 'определять, решать, назначать',
+    cat: 'Глагол',
+    verbForms: { p3: 'bestimmt', perf: 'hat bestimmt', prät: 'bestimmte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'Das bestimme ich!', ru: 'Это решаю я!' },
+      { de: 'den Preis bestimmen', ru: 'определить цену' },
+      { de: 'jemanden zum Chef bestimmen', ru: 'назначить кого-то руководителем' },
+    ],
+    notes: 'Неотделяемый глагол (be-). Bestimmt (нареч.) = определённо, точно. Das Bestimmte = определённое.'
+  },
+  {
+    id: 86, de: 'benutzen', ru: 'использовать, пользоваться',
+    cat: 'Глагол',
+    verbForms: { p3: 'benutzt', perf: 'hat benutzt', prät: 'benutzte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'das Wörterbuch benutzen', ru: 'пользоваться словарём' },
+      { de: 'öffentliche Verkehrsmittel benutzen', ru: 'пользоваться общественным транспортом' },
+      { de: 'jemanden benutzen', ru: 'использовать кого-то (в своих целях)' },
+    ],
+    notes: 'Синонимы: verwenden, nutzen. Benutzen — самый нейтральный вариант. Негативный оттенок: использовать человека.'
+  },
+  {
+    id: 87, de: 'nutzen', ru: 'использовать, извлекать пользу',
+    cat: 'Глагол',
+    verbForms: { p3: 'nutzt', perf: 'hat genutzt', prät: 'nutzte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'eine Chance nutzen', ru: 'воспользоваться шансом' },
+      { de: 'die Zeit nutzen', ru: 'использовать время с пользой' },
+      { de: 'Das nutzt mir nichts.', ru: 'Это мне ничего не даёт.' },
+    ],
+    notes: 'Акцент на извлечении пользы. Ср.: benutzen (просто применять), verwenden (применять/употреблять).'
+  },
+  {
+    id: 88, de: 'gucken', ru: 'смотреть, глядеть (разг.)',
+    cat: 'Глагол',
+    verbForms: { p3: 'guckt', perf: 'hat geguckt', prät: 'guckte' },
+    verbCase: '—',
+    phrases: [
+      { de: 'Fernsehen gucken', ru: 'смотреть телевизор (разг.)' },
+      { de: 'Guck mal!', ru: 'Смотри! / Гляди!' },
+      { de: 'Was guckst du so?', ru: 'Чего так смотришь?' },
+    ],
+    notes: 'Разговорный вариант schauen/sehen. Типично для севера Германии. На юге чаще: schauen.'
+  },
+  {
+    id: 89, de: 'halten', ru: 'держать; останавливаться; считать (кем-то)',
+    cat: 'Глагол',
+    verbForms: { p3: 'hält', perf: 'hat gehalten', prät: 'hielt' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'die Tür halten', ru: 'держать дверь' },
+      { de: 'Der Bus hält hier.', ru: 'Автобус останавливается здесь.' },
+      { de: 'jemanden für klug halten', ru: 'считать кого-то умным' },
+      { de: 'Wort halten', ru: 'держать слово' },
+    ],
+    notes: 'Сильный глагол с умлаутом: hält – hielt – gehalten. Многозначный! Halten für + Akk. = считать кем/чем-то.'
+  },
+  {
+    id: 90, de: 'aufpassen', ru: 'следить, быть внимательным; присматривать',
+    cat: 'Глагол',
+    verbForms: { p3: 'passt auf', perf: 'hat aufgepasst', prät: 'passte auf' },
+    verbCase: '—',
+    phrases: [
+      { de: 'Pass auf!', ru: 'Осторожно! / Внимание!' },
+      { de: 'auf die Kinder aufpassen', ru: 'присматривать за детьми' },
+      { de: 'im Unterricht aufpassen', ru: 'быть внимательным на уроке' },
+    ],
+    notes: 'Отделяемый глагол (auf-). Управление: auf + Akk. (присматривать за кем-то).'
+  },
+  {
+    id: 91, de: 'genießen', ru: 'наслаждаться, получать удовольствие',
+    cat: 'Глагол',
+    verbForms: { p3: 'genießt', perf: 'hat genossen', prät: 'genoss' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'das Leben genießen', ru: 'наслаждаться жизнью' },
+      { de: 'das Essen genießen', ru: 'наслаждаться едой' },
+      { de: 'Genieß den Moment!', ru: 'Наслаждайся моментом!' },
+    ],
+    notes: 'Сильный глагол: genießt – genoss – genossen. Der Genuss = удовольствие, наслаждение.'
+  },
+  {
+    id: 92, de: 'töten', ru: 'убивать, умерщвлять',
+    cat: 'Глагол',
+    verbForms: { p3: 'tötet', perf: 'hat getötet', prät: 'tötete' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'jemanden töten', ru: 'убить кого-то' },
+      { de: 'Zeit töten', ru: 'убивать время' },
+      { de: 'getötet werden', ru: 'быть убитым' },
+    ],
+    notes: 'Нейтральный юридический/медицинский термин. Der Tod = смерть. Tödlich = смертельный.'
+  },
+  {
+    id: 93, de: 'der Anschluss', ru: 'подключение; стыковка; связь; присоединение',
+    cat: 'Существительное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'den Anschluss verpassen', ru: 'опоздать на пересадку; отстать от группы' },
+      { de: 'Anschluss ans Internet', ru: 'подключение к интернету' },
+      { de: 'Anschluss finden', ru: 'найти общий язык / влиться в коллектив' },
+    ],
+    notes: 'der Anschluss, Anschlüsse (муж. род). Многозначное слово: транспорт, электричество, социальные связи.'
+  },
+  {
+    id: 94, de: 'der Anfang', ru: 'начало, старт',
+    cat: 'Существительное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'am Anfang', ru: 'в начале' },
+      { de: 'von Anfang an', ru: 'с самого начала' },
+      { de: 'einen Anfang machen', ru: 'сделать начало / начать' },
+    ],
+    notes: 'der Anfang, Anfänge (муж. род). Антоним: das Ende (конец). Anfänger = начинающий.'
+  },
+  {
+    id: 95, de: 'jawohl', ru: 'так точно; да, конечно; именно так',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Jawohl, das stimmt!', ru: 'Именно так, это верно!' },
+      { de: 'Jawohl, Herr Lehrer!', ru: 'Так точно, господин учитель!' },
+    ],
+    notes: 'Торжественное/военное «да». В обычной речи звучит иронично или шутливо. Синоним: ja, natürlich.'
+  },
+  {
+    id: 96, de: 'wechseln', ru: 'менять, сменять; обменивать',
+    cat: 'Глагол',
+    verbForms: { p3: 'wechselt', perf: 'hat gewechselt', prät: 'wechselte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'die Arbeit wechseln', ru: 'сменить работу' },
+      { de: 'Geld wechseln', ru: 'обменять деньги / разменять' },
+      { de: 'das Thema wechseln', ru: 'сменить тему' },
+    ],
+    notes: 'Ср.: verwechseln = перепутать. Wechseln = целенаправленно сменить. Der Wechsel = смена, обмен.'
+  },
+  {
+    id: 97, de: 'verwechseln', ru: 'путать, перепутать',
+    cat: 'Глагол',
+    verbForms: { p3: 'verwechselt', perf: 'hat verwechselt', prät: 'verwechselte' },
+    verbCase: 'Akkusativ',
+    phrases: [
+      { de: 'die Wörter verwechseln', ru: 'перепутать слова' },
+      { de: 'Ich habe euch verwechselt.', ru: 'Я вас перепутал.' },
+      { de: 'leicht zu verwechseln', ru: 'легко перепутать' },
+    ],
+    notes: 'Неотделяемый глагол (ver-). Приставка ver- указывает на ошибку. Ср.: wechseln (намеренно менять).'
+  },
+  {
+    id: 98, de: 'das Ergebnis', ru: 'результат, итог',
+    cat: 'Существительное',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'ein gutes Ergebnis erzielen', ru: 'достичь хорошего результата' },
+      { de: 'das Ergebnis der Prüfung', ru: 'результат экзамена' },
+      { de: 'zu einem Ergebnis kommen', ru: 'прийти к результату / выводу' },
+    ],
+    notes: 'das Ergebnis, -se (ср. род). Синонимы: das Resultat, das Fazit (итог/вывод).'
+  },
+  {
+    id: 99, de: 'ab und zu', ru: 'время от времени, иногда',
+    cat: 'Другое',
+    verbForms: null, verbCase: null,
+    phrases: [
+      { de: 'Ich gehe ab und zu ins Kino.', ru: 'Я иногда хожу в кино.' },
+      { de: 'Das passiert ab und zu.', ru: 'Это случается время от времени.' },
+    ],
+    notes: 'Синонимы: manchmal, hin und wieder, gelegentlich. Более разговорное, чем manchmal.'
+  },
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+
+let words = [];
+let editingId = null;
+let activeFilter = 'Все';
+let searchQuery = '';
+
+const STORAGE_KEY = 'german-dict-v3';
+
+function loadData() {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      // Merge: keep user edits but add any new initial words missing by id
+      const ids = new Set(parsed.map(w => w.id));
+      const merged = [...parsed];
+      INITIAL_WORDS.forEach(w => { if (!ids.has(w.id)) merged.push(w); });
+      words = merged;
+    } else {
+      words = INITIAL_WORDS;
+    }
+    saveData();
+  } catch(e) {
+    words = INITIAL_WORDS;
+  }
+}
+
+function saveData() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(words)); } catch(e) {}
+}
+
+// ─── RENDER ──────────────────────────────────────────────────────────────────
+
+function renderAll() {
+  renderTabs();
+  renderWords();
+  renderStats();
+}
+
+function renderStats() {
+  document.getElementById('total-count').textContent = words.length;
+  document.getElementById('verb-count').textContent = words.filter(w => w.cat === 'Глагол').length;
+}
+
+function renderTabs() {
+  const container = document.getElementById('cat-tabs');
+  const counts = {};
+  CATEGORIES.forEach(c => counts[c] = 0);
+  counts['Все'] = words.length;
+  words.forEach(w => { if (counts[w.cat] !== undefined) counts[w.cat]++; });
+
+  container.innerHTML = CATEGORIES.map(cat => {
+    const n = counts[cat];
+    return `<button class="cat-tab ${activeFilter===cat?'active':''}" onclick="setFilter('${cat}')">${cat} <span style="opacity:0.6;font-size:10px;">${n}</span></button>`;
+  }).join('');
+}
+
+function getFiltered() {
+  let list = [...words];
+  if (activeFilter !== 'Все') list = list.filter(w => w.cat === activeFilter);
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    list = list.filter(w =>
+      w.de.toLowerCase().includes(q) ||
+      w.ru.toLowerCase().includes(q) ||
+      (w.notes && w.notes.toLowerCase().includes(q))
+    );
+  }
+  const sort = document.getElementById('sort-select').value;
+  if (sort === 'de') list.sort((a,b) => a.de.localeCompare(b.de, 'de'));
+  else if (sort === 'ru') list.sort((a,b) => a.ru.localeCompare(b.ru, 'ru'));
+  else list.sort((a,b) => b.id - a.id);
+  return list;
+}
+
+function renderWords() {
+  const grid = document.getElementById('word-grid');
+  const list = getFiltered();
+
+  if (list.length === 0) {
+    grid.innerHTML = `<div class="empty-state">
+      <div class="empty-state-icon">📖</div>
+      <div class="empty-state-text">Слов не найдено</div>
+      <div class="empty-state-sub">Попробуйте изменить поиск или добавьте новое слово</div>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(w => renderCard(w)).join('');
+}
+
+function renderCard(w) {
+  const caseBadgeClass = {
+    'Akkusativ': 'case-akkusativ',
+    'Dativ': 'case-dativ',
+    'Akkusativ / Dativ': 'case-both',
+    '—': 'case-none'
+  }[w.verbCase] || 'case-none';
+
+  const verbBlock = w.cat === 'Глагол' && w.verbForms ? `
+    <div class="verb-forms">
+      <div class="verb-forms-title">Формы глагола</div>
+      <div class="verb-grid">
+        <span class="vf-label">3-е л. ед.ч.</span><span class="vf-value">${esc(w.verbForms.p3 || '—')}</span>
+        <span class="vf-label">Перфект</span><span class="vf-value">${esc(w.verbForms.perf || '—')}</span>
+        <span class="vf-label">Präteritum</span><span class="vf-value">${esc(w.verbForms.prät || '—')}</span>
+      </div>
+      ${w.verbCase ? `<span class="case-badge ${caseBadgeClass}">${esc(w.verbCase)}</span>` : ''}
+    </div>` : '';
+
+  const phrases = w.phrases && w.phrases.length
+    ? `<div class="phrases">
+        <div class="phrases-title">Словосочетания</div>
+        ${w.phrases.map(p => `
+          <div class="phrase-item">
+            <span class="phrase-de">${esc(p.de)}</span>
+            <span class="phrase-ru">— ${esc(p.ru)}</span>
+          </div>`).join('')}
+      </div>` : '';
+
+  const notes = w.notes ? `<div class="divider"></div><div style="font-size:12px;color:var(--ink3);font-style:italic;">${esc(w.notes)}</div>` : '';
+
+  return `
+  <div class="word-card" id="card-${w.id}">
+    <div class="card-actions">
+      <button class="btn-edit" onclick="openEdit(${w.id})" title="Редактировать">✏️</button>
+      <button class="btn-edit btn-danger" onclick="deleteWord(${w.id})" title="Удалить" style="font-size:12px;">✕</button>
+    </div>
+    <div class="card-top">
+      <div class="card-left">
+        <div class="word-de">${esc(w.de)}</div>
+        <div class="word-ru">${esc(w.ru)}</div>
+      </div>
+      <span class="cat-badge cat-${w.cat}">${w.cat}</span>
+    </div>
+    ${verbBlock}
+    ${phrases}
+    ${notes}
+  </div>`;
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ─── FILTERS ─────────────────────────────────────────────────────────────────
+
+function setFilter(cat) {
+  activeFilter = cat;
+  renderAll();
+}
+
+document.getElementById('search').addEventListener('input', e => {
+  searchQuery = e.target.value.trim();
+  renderWords();
+});
+
+document.getElementById('sort-select').addEventListener('change', () => renderWords());
+
+// ─── MODAL ───────────────────────────────────────────────────────────────────
+
+function openModal(id = null) {
+  editingId = id;
+  document.getElementById('modal-title').textContent = id ? 'Редактировать слово' : 'Добавить слово';
+  clearForm();
+
+  if (id) {
+    const w = words.find(x => x.id === id);
+    if (!w) return;
+    document.getElementById('f-de').value = w.de;
+    document.getElementById('f-ru').value = w.ru;
+    document.getElementById('f-cat').value = w.cat;
+    if (w.verbForms) {
+      document.getElementById('f-p3').value = w.verbForms.p3 || '';
+      document.getElementById('f-perf').value = w.verbForms.perf || '';
+      document.getElementById('f-prät').value = w.verbForms.prät || '';
+    }
+    if (w.verbCase) document.getElementById('f-case').value = w.verbCase;
+    document.getElementById('f-notes').value = w.notes || '';
+    (w.phrases || []).forEach(p => addPhraseRow(p.de, p.ru));
+  } else {
+    addPhraseRow();
+  }
+
+  handleCatChange();
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function openEdit(id) { openModal(id); }
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  editingId = null;
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+function clearForm() {
+  ['f-de','f-ru','f-p3','f-perf','f-prät','f-notes'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('f-cat').value = 'Глагол';
+  document.getElementById('f-case').value = 'Akkusativ';
+  document.getElementById('phrases-editor').innerHTML = '';
+}
+
+function handleCatChange() {
+  const isVerb = document.getElementById('f-cat').value === 'Глагол';
+  document.getElementById('verb-section').classList.toggle('visible', isVerb);
+}
+
+function addPhraseRow(de = '', ru = '') {
+  const editor = document.getElementById('phrases-editor');
+  const div = document.createElement('div');
+  div.className = 'phrase-row';
+  div.innerHTML = `
+    <input type="text" placeholder="Auf Deutsch..." value="${esc(de)}">
+    <input type="text" placeholder="На русском..." value="${esc(ru)}">
+    <button class="btn-remove-phrase" onclick="this.parentElement.remove()">×</button>`;
+  editor.appendChild(div);
+}
+
+function saveWord() {
+  const de = document.getElementById('f-de').value.trim();
+  const ru = document.getElementById('f-ru').value.trim();
+  if (!de || !ru) { alert('Заполните немецкое слово и перевод'); return; }
+
+  const cat = document.getElementById('f-cat').value;
+  const isVerb = cat === 'Глагол';
+
+  const verbForms = isVerb ? {
+    p3: document.getElementById('f-p3').value.trim(),
+    perf: document.getElementById('f-perf').value.trim(),
+    prät: document.getElementById('f-prät').value.trim(),
+  } : null;
+
+  const verbCase = isVerb ? document.getElementById('f-case').value : null;
+
+  const phrases = [];
+  document.querySelectorAll('#phrases-editor .phrase-row').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const pDe = inputs[0].value.trim();
+    const pRu = inputs[1].value.trim();
+    if (pDe || pRu) phrases.push({ de: pDe, ru: pRu });
+  });
+
+  const notes = document.getElementById('f-notes').value.trim();
+
+  if (editingId) {
+    const idx = words.findIndex(w => w.id === editingId);
+    if (idx >= 0) words[idx] = { ...words[idx], de, ru, cat, verbForms, verbCase, phrases, notes };
+  } else {
+    const newId = words.length ? Math.max(...words.map(w => w.id)) + 1 : 1;
+    words.push({ id: newId, de, ru, cat, verbForms, verbCase, phrases, notes });
+  }
+
+  saveData();
+  closeModal();
+  renderAll();
+}
+
+function deleteWord(id) {
+  if (!confirm('Удалить это слово?')) return;
+  words = words.filter(w => w.id !== id);
+  saveData();
+  renderAll();
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+loadData();
+renderAll();
+</script>
+
+</body>
+</html>
