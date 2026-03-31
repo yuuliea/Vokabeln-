@@ -1956,24 +1956,26 @@ function renderCard(w) {
           </div>`).join('')}
       </div>` : '';
 
-  const notes = w.notes ? `<div class="divider"></div>;
+  
+
+  const notes = w.notes ? `<div class="divider"></div><div style="font-size:12px;color:var(--ink3);font-style:italic;">${esc(w.notes)}</div>` : '';
 
   return `
   <div class="word-card" id="card-${w.id}">
-  <div class="card-top">
-  <div class="card-left">
-    <div class="word-de">${esc(w.de)}</div>
+    <div class="card-top">
+      <div class="card-left">
+        <div class="word-de">${esc(w.de)}</div>
         <div class="word-ru">${esc(w.ru)}</div>
-          </div>
-  <div style="font-size:12px;color:var(--ink3);font-style:italic; title="Удалить" style="font-size:12px;"">
-          <span class="cat-badge cat-${w.cat}">${w.cat}</span>
-    <div class="card-actions">
-      <button class="btn-edit" onclick="openEdit(${w.id})" title="Редактировать">✏️</button>
-      <button class="btn-edit btn-danger" onclick="deleteWord(${w.id})">✕</button>
-    </div>
-     </div>
       </div>
-
+      <div style="display:flex; align-items:flex-start; gap:6px; flex-shrink:0;">
+        <span class="cat-badge cat-${w.cat}">${w.cat}</span>
+        <div class="card-actions">
+          <button class="btn-edit" onclick="openEdit(${w.id})" title="Редактировать">✏️</button>
+          <button class="btn-edit btn-danger" onclick="deleteWord(${w.id})">✕</button>
+        </div>
+      </div>
+    </div>
+    
   
     ${verbBlock}
     ${phrases}
