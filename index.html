@@ -252,7 +252,6 @@ background-color: #FDFAF4;
 border: 1.5px solid #C8B89A;
 border-radius: 10px;
 padding: 20px;
-position: relative;
 transition: transform 0.18s, box-shadow 0.18s;
 animation: fadeIn 0.3s ease;
 }
@@ -399,7 +398,7 @@ min-width: 0;
 }
 
 .card-actions {
-position: absolute;
+position: flex;
 top: 12px;
 right: 12px;
 display: flex;
@@ -1957,21 +1956,25 @@ function renderCard(w) {
           </div>`).join('')}
       </div>` : '';
 
-  const notes = w.notes ? `<div class="divider"></div><div style="font-size:12px;color:var(--ink3);font-style:italic;">${esc(w.notes)}</div>` : '';
+  const notes = w.notes ? `<div class="divider"></div>;
 
   return `
   <div class="word-card" id="card-${w.id}">
+  <div class="card-top">
+  <div class="card-left">
+    <div class="word-de">${esc(w.de)}</div>
+        <div class="word-ru">${esc(w.ru)}</div>
+          </div>
+  <div style="font-size:12px;color:var(--ink3);font-style:italic; title="Удалить" style="font-size:12px;"">
+          <span class="cat-badge cat-${w.cat}">${w.cat}</span>
     <div class="card-actions">
       <button class="btn-edit" onclick="openEdit(${w.id})" title="Редактировать">✏️</button>
-      <button class="btn-edit btn-danger" onclick="deleteWord(${w.id})" title="Удалить" style="font-size:12px;">✕</button>
+      <button class="btn-edit btn-danger" onclick="deleteWord(${w.id})">✕</button>
     </div>
-    <div class="card-top">
-      <div class="card-left">
-        <div class="word-de">${esc(w.de)}</div>
-        <div class="word-ru">${esc(w.ru)}</div>
+     </div>
       </div>
-      <span class="cat-badge cat-${w.cat}">${w.cat}</span>
-    </div>
+
+  
     ${verbBlock}
     ${phrases}
     ${notes}
